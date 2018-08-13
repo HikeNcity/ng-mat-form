@@ -1,4 +1,17 @@
-# Simple Koa2 - React - Redux boilerplate
+# NgMatForm
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+
+# Angular Material Forms example
+
+This is a demo on how to create an angular material form using the angular and material CLI.
+
+It includes:
+* Routing
+* Services
+* Assets (json file)
+* Reactive form control (including FormArray)
+* Form validation (including messages)
 
 ## Initial Checks
 - check npm setup for production only (this was an issue I faced during setup):
