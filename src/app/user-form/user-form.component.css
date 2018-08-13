@@ -1,0 +1,18 @@
+
+.form-container {
+  margin: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-form-field{
+  margin: 10px;
+}
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}

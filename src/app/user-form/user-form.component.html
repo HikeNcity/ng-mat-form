@@ -1,0 +1,77 @@
+<form novalidate [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-form-field appearance="outline">
+      <mat-label>username</mat-label>
+      <input matInput formControlName="username" required>
+      <mat-error *ngFor="let validation of userFormValidationMessages.username">
+        <mat-error *ngIf="userForm.get('username').hasError(validation.type)
+        && (userForm.get('username').dirty
+        || userForm.get('username').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>password</mat-label>
+      <input matInput type="password" formControlName="password" required>
+      <mat-error *ngFor="let validation of userFormValidationMessages.password">
+        <mat-error *ngIf="userForm.get('password').hasError(validation.type)
+        && (userForm.get('password').dirty
+        || userForm.get('password').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngFor="let validation of userFormValidationMessages.email">
+        <mat-error *ngIf="userForm.get('email').hasError(validation.type)
+        && (userForm.get('email').dirty
+        || userForm.get('email').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </mat-card>
+  <mat-card>
+    <div formArrayName="roles">
+      <div *ngFor="let userRole of roles.controls; let i=index" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <mat-label>role</mat-label>
+          <mat-select formControlName="roleId" required>
+            <mat-option *ngFor="let roleItem of roleList" [value]="roleItem.id">
+              {{roleItem.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngFor="let validation of userFormValidationMessages.roleId">
+            <mat-error *ngIf="userRole.get('roleId').hasError(validation.type)
+            && (userRole.get('roleId').dirty
+            || userRole.get('roleId').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <input matInput [matDatepicker]="picker" formControlName="expiryDate">
+          <mat-error *ngFor="let validation of userFormValidationMessages.expiryDate">
+            <mat-error *ngIf="userRole.get('expiryDate').hasError(validation.type)
+            && (userRole.get('expiryDate').dirty
+            || userRole.get('expiryDate').touched)">{{validation.message}}</mat-error>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button *ngIf="i>0" mat-icon-button (click)="removeUserRole(i)">
+          <mat-icon aria-label="remove role">delete</mat-icon>
+        </button>
+
+      </div>
+      <button mat-icon-button (click)="addUserRole()">
+        <mat-icon aria-label="add role">note_add</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+    <mat-card>
+  <button mat-raised-button type="submit" [disabled]="userForm.invalid">Submit</button>
+    </mat-card>
+</form>
+
+<pre>{{userForm.value | json}}</pre>
+<pre>{{user | json}}<pre>
